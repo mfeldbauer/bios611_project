@@ -2,6 +2,7 @@ PHONY: clean
 
 clean:
 	rm derived_data/*
+	rm figures/*
 
 derived_data/patient_and_clinical_data.csv: source_data/METABRIC_RNA_Mutation.csv separate_data.R
 	Rscript separate_data.R

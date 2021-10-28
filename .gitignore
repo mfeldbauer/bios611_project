@@ -2,3 +2,5 @@
 .config/
 .local/
 .bash_history
+derived_data/*
+figures/*
