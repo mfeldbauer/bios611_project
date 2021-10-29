@@ -1,4 +1,5 @@
 PHONY: clean
+PHONY: shiny_app
 #PHONY: shiny_heatmap
 
 clean:
@@ -7,6 +8,9 @@ clean:
 
 #shiny_heatmap: derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv expression_heatmap.R
 #	Rscript expression_heatmap.R
+
+shiny_app: derived_data/patient_and_clinical_data.csv interactive_plots.R
+	Rscript interactive_plots.R
 
 derived_data/patient_and_clinical_data.csv: source_data/METABRIC_RNA_Mutation.csv separate_data.R
 	mkdir -p derived_data
