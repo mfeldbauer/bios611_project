@@ -28,7 +28,18 @@ Go to the terminal and run
 
 ``make figures/mrna_expression_heatmap_most_mutated_genes.png``
 
-## How to run the shiny app:
+## How to run the shiny app containing an interactive expression heatmap:
+``expression_heatmap_interactive.R`` creates a shiny app containing an interactive heatmap of mRNA expression. You can choose areas on the map that you want to look at further and the supmap will be displayed.
+
+In order to run this shiny app, build the docker image and connect to Rstudio using the above docker command. Then run this command in your Rstudio terminal:
+
+``make shiny_heatmap`` 
+
+Once it runs, open a new browser tab and go to ``localhost:8080``. You will be able to choose the subtype and which data you want to visualize.
+
+To close the connection, close the ``localhost:8080`` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the other shiny app.
+
+## How to run the shiny app to explore patient data:
 ``interactive_plots.R`` creates a shiny app that allows you to explore patient data based on breast cancer subtype. You can choose which data to display on the x-axis (age at diagnosis, whether the patient is living or has died, and survival length in months) and which subtype to investigate.
 
 In order to run the shiny app, build the docker image and connect to Rstudio using the above docker command. Then run this command in your Rstudio terminal:
@@ -37,4 +48,4 @@ In order to run the shiny app, build the docker image and connect to Rstudio usi
 
 Once it runs, open a new browser tab and go to ``localhost:8080``. You will be able to choose the subtype and which data you want to visualize. 
 
-To close the connection, close the ``localhost:8080`` browser tab and click the stopsign in the upper corner of the Rstudio terminal.
+To close the connection, close the ``localhost:8080`` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the other shiny app.

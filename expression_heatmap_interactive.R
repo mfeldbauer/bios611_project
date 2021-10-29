@@ -1,5 +1,8 @@
 #expression_heatmap.R
 #Purpose: to make a heatmap of the mRNA expression
+options(shiny.port=8080)
+options(shiny.port=8080, shiny.host="0.0.0.0")
+
 library(ComplexHeatmap)
 library(tidyverse)
 library(circlize)
