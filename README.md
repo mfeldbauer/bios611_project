@@ -36,3 +36,5 @@ In order to run the shiny app, build the docker image and connect to Rstudio usi
 ``make shiny_app``
 
 Once it runs, open a new browser tab and go to ``localhost:8080``. You will be able to choose the subtype and which data you want to visualize. 
+
+To close the connection, close the ``localhost:8080`` browser tab and click the stopsign in the upper corner of the Rstudio terminal.
