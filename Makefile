@@ -6,8 +6,8 @@ clean:
 	rm -f derived_data/*
 	rm -f figures/*
 
-shiny_heatmap: derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv expression_heatmap.R
-	Rscript expression_heatmap.R
+shiny_heatmap: derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv expression_heatmap_interactive.R
+	Rscript expression_heatmap_interactive.R
 
 figures/mrna_expression_heatmap_most_mutated_genes.png: derived_data/expression_data.csv derived_data/patient_and_clinical_data.csv derived_data/mutation_data.csv heatmap_most_mutated_genes.R
 	Rscript heatmap_most_mutated_genes.R
