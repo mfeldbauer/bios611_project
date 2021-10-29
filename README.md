@@ -1,6 +1,7 @@
 # Breast Cancer Analysis Project
 
 ## What does this project contain?
+This project contains analysis of the METABRIC (Nature 2012 & Nat Commun 2016) breast cancer dataset. The dataset includes Patient and Clinical data for 1,904 patients. mRNA expression levels are included as z-scores and gene mutation data is also included.
 
 ## How to build the docker image:
 Command to build the docker image (run from directory containing Dockerfile):
@@ -18,7 +19,7 @@ Example:
 
 ``docker run --rm -d -v /mnt/c/Users/mifel/Documents/UNC/Classes/BIOS611_data_sci/bios611_project:/home/rstudio -p 8787:8787 -p 8080:8080 -e PASSWORD=pw -t project-env``
 
-##How to run the shiny app:
+## How to run the shiny app:
 ``interactive_plots.R`` creates a shiny app that allows you to explore patient data based on breast cancer subtype. You can choose which data to display on the x-axis (age at diagnosis, whether the patient is living or has died, and survival length in months) and which subtype to investigate.
 
 In order to run the shiny app, build the docker image and connect to Rstudio using the above commands. Then run this command in your Rstudio terminal:
