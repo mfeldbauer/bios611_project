@@ -5,3 +5,5 @@
 derived_data/*
 figures/*
 scratch.R
+*.pdf
+*.log

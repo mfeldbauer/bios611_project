@@ -1,0 +1,18 @@
+---
+title: "BIOS611 Breast Cancer Analysis Project"
+author: "Mikayla Feldbauer"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r figs, echo=FALSE, fig.cap="\\label{fig:figs}Heatmap of mRNA expression featuring only the genes with more than 100 mutations recorded in the dataset."}
+
+knitr::include_graphics("figures/mrna_expression_heatmap_most_mutated_genes.png")
+```
+

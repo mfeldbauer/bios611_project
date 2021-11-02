@@ -23,10 +23,10 @@ After running this command, open your browser and go to ``localhost:8787``. Sign
 ## In order to run analysis:
 Build the Docker image and connect to Rstudio using the above docker command. Once you log into Rstudio, change into the project directory by clicking on "project" in the files pane. Then click the "more" gear in that same pane and click "Set As Working Directory".
 
-## How to make the figures:
+## How to make the report:
 Go to the Rstudio terminal and run
 
-``make figures/mrna_expression_heatmap_most_mutated_genes.png``
+``make report.pdf``
 
 ## How to run the shiny app containing an interactive expression heatmap:
 ``expression_heatmap_interactive.R`` creates a shiny app containing an interactive heatmap of mRNA expression. You can choose areas on the map that you want to look at further and the submap will be displayed.
