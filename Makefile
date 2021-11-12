@@ -5,7 +5,7 @@
 clean:
 	rm -rf derived_data
 	rm -rf figures
-	rm report.pdf
+	rm -f report.pdf
 
 report.pdf: figures/mrna_expression_heatmap_most_mutated_genes.png build_report.R
 	Rscript build_report.R
@@ -20,14 +20,6 @@ figures/mrna_expression_heatmap_most_mutated_genes.png: derived_data/expression_
 	mkdir -p figures
 	Rscript heatmap_most_mutated_genes.R
 
-derived_data/patient_and_clinical_data.csv: source_data/METABRIC_RNA_Mutation.csv separate_data.R
-	mkdir -p derived_data
-	Rscript separate_data.R
-
-derived_data/expression_data.csv: source_data/METABRIC_RNA_Mutation.csv separate_data.R
-	mkdir -p derived_data
-	Rscript separate_data.R
-
-derived_data/mutation_data.csv: source_data/METABRIC_RNA_Mutation.csv separate_data.R
+derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv derived_data/mutation_data.csv &: source_data/METABRIC_RNA_Mutation.csv separate_data.R
 	mkdir -p derived_data
 	Rscript separate_data.R
