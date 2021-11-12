@@ -7,8 +7,8 @@ clean:
 	rm -rf figures
 	rm report.pdf
 
-report.pdf: report.Rmd figures/mrna_expression_heatmap_most_mutated_genes.png
-	Rscript -e "rmarkdown::render('report.Rmd',output_format='pdf_document')"
+report.pdf: figures/mrna_expression_heatmap_most_mutated_genes.png build_report.R
+	Rscript build_report.R
 
 shiny_heatmap: derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv expression_heatmap_interactive.R
 	Rscript expression_heatmap_interactive.R

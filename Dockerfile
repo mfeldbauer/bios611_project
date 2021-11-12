@@ -9,3 +9,4 @@ RUN R -e "install.packages(\"plotly\"); if(!library(plotly, logical.return=T)) q
 RUN R -e "install.packages(\"janitor\"); if(!library(janitor, logical.return=T)) quit(status=10)"
 RUN R -e "devtools::install_github('jokergoo/ComplexHeatmap')"
 RUN R -e "devtools::install_github('jokergoo/InteractiveComplexHeatmap')"
+RUN R -e "install.packages('tinytex'); if(!library(tinytex, logical.return=T)) quit(status=10); tinytex::install_tinytex(dir=\"/opt/tinytex\")"
