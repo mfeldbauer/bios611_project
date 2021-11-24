@@ -10,6 +10,21 @@ clean:
 report.pdf: figures/mrna_expression_heatmap_most_mutated_genes.png build_report.R
 	Rscript build_report.R
 
+#Larger dataset
+figures/highly_exp_and_variable_genes_large_dataset.png: source_data/%.txt prepare_large_dataset.R
+	mkdir -p figures
+	Rscript prepare_large_dataset.R
+
+derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv: source_data/%.txt prepare_large_dataset.R
+	mkdir -p derived_data
+	Rscript prepare_large_dataset.R
+
+#Download the large dataset from cbioportal
+source_data/%.txt: 
+	./obtain_large_dataset.sh
+
+
+#Initial dataset
 shiny_heatmap: derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv expression_heatmap_interactive.R
 	Rscript expression_heatmap_interactive.R
 

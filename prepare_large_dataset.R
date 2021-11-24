@@ -5,7 +5,7 @@
 library(tidyverse)
 
 #Read in dataset and prepare the data
-pam50_genes<-read.csv("source_data/pam50_genes.txt", header=TRUE, sep=",")
+pam50_genes<-read.csv("source_data/pam50_genes.csv", header=TRUE, sep=",")
 immune_genes<-read.csv("source_data/immune_genes.csv", header=TRUE, sep=",")
 
 expression_data<-read.table(dir('source_data/', full.names=T, pattern="^data"), sep="\t", header=TRUE, fill=TRUE) %>% 
