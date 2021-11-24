@@ -5,10 +5,10 @@
 library(tidyverse)
 
 #Read in dataset and prepare the data
-pam50_genes<-read.table("source_data/pam50_genes.txt", header=TRUE)
-immune_genes<-read.table("source_data/immune_genes.txt", header=TRUE)
+pam50_genes<-read.csv("source_data/pam50_genes.txt", header=TRUE, sep=",")
+immune_genes<-read.csv("source_data/immune_genes.csv", header=TRUE, sep=",")
 
-expression_data<-read.table("source_data/data_expression_median.txt", sep="\t", header=TRUE, fill=TRUE) %>% 
+expression_data<-read.table(dir('source_data/', full.names=T, pattern="^data"), sep="\t", header=TRUE, fill=TRUE) %>% 
   select(-Entrez_Gene_Id)
 expression_data<-expression_data[!duplicated(expression_data[,"Hugo_Symbol"]),]
 rownames(expression_data)<-expression_data[,1]
@@ -20,7 +20,7 @@ expression_data[1:3, 1:5]
 exp_data.med<-apply(expression_data, 1, median, na.rm=TRUE)
 exp_data.sd<-apply(expression_data, 1, sd, na.rm=TRUE)
 
-exp_cutoff<- 6
+exp_cutoff<- 7.5
 sd_cutoff<- 0.5
 
 summary((exp_data.med>exp_cutoff & exp_data.sd>sd_cutoff) | rownames(expression_data) %in% pam50_genes$gene)
