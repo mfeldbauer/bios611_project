@@ -7,3 +7,4 @@ figures/*
 scratch.R
 *.pdf
 *.log
+source_data/data*
