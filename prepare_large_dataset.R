@@ -39,4 +39,4 @@ expression_data<-subset(expression_data, (expression_data[, "exp_data.med"] > ex
                                             expression_data[, "exp_data.sd"] > sd_cutoff) | 
                           rownames(expression_data) %in% pam50_genes$gene)
 
-write.table(expression_data, "derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", sep="\t", col.names=NA)
+write.table(expression_data, "derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", sep=",", col.names=NA)
