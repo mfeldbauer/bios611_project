@@ -1,51 +1,51 @@
-gene
-ACTR3B
-ANLN
-BAG1
-BCL2
-BIRC5
-BLVRA
-CCNB1
-CCNE1
-CDC20
-CDC6
-CDCA1
-CDH3
-CENPF
-CEP55
-CXXC5
-EGFR
-ERBB2
-ESR1
-EXO1
-FGFR4
-FOXA1
-FOXC1
-GPR160
-GRB7
-KIF2C
-KNTC2
-KRT14
-KRT17
-KRT5
-MAPT
-MDM2
-MELK
-MIA
-MKI67
-MLPH
-MMP11
-MYBL2
-MYC
-NAT1
-ORC6L
-PGR
-PHGDH
-PTTG1
-RRM2
-SFRP1
-SLC39A6
-TMEM45B
-TYMS
-UBE2C
-UBE2T
+gene,cell_type
+ACTR3B,actin
+ANLN,actin
+BAG1,regulatory
+BCL2,apoptosis inhibitor
+BIRC5,apoptosis inhibitor
+BLVRA,catalysis
+CCNB1,mitosis
+CCNE1,regulatory
+CDC20,regulatory
+CDC6,regulatory
+CDCA1,cell cycle
+CDH3,other
+CENPF,mitosis
+CEP55,mitosis
+CXXC5,regulatory
+EGFR,growth factor
+ERBB2,growth factor
+ESR1,hormone receptor
+EXO1,other
+FGFR4,regulatory
+FOXA1,regulatory
+FOXC1,transcription factor
+GPR160,other
+GRB7,other
+KIF2C,mitosis
+KNTC2,cell cycle
+KRT14,keratin
+KRT17,keratin
+KRT5,keratin
+MAPT,mitosis
+MDM2,regulatory
+MELK,regulatory
+MIA,other
+MKI67,other
+MLPH,other
+MMP11,other
+MYBL2,cell cycle
+MYC,transcription factor
+NAT1,catalysis
+ORC6L,cell cycle
+PGR,hormone receptor
+PHGDH,catalysis
+PTTG1,regulatory
+RRM2,catalysis
+SFRP1,cell cycle
+SLC39A6,catalysis
+TMEM45B,other
+TYMS,catalysis
+UBE2C,catalysis
+UBE2T,catalysis
