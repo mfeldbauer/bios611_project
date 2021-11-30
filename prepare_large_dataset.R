@@ -6,7 +6,6 @@ library(tidyverse)
 
 #Read in dataset and prepare the data
 pam50_genes<-read.csv("source_data/pam50_genes.csv", header=TRUE, sep=",")
-immune_genes<-read.csv("source_data/immune_genes.csv", header=TRUE, sep=",")
 
 expression_data<-read.table(dir('source_data/', full.names=T, pattern="^data"), sep="\t", header=TRUE, fill=TRUE) %>% 
   select(-Entrez_Gene_Id)
@@ -27,9 +26,10 @@ summary((exp_data.med>exp_cutoff & exp_data.sd>sd_cutoff) | rownames(expression_
 
 png("figures/highly_exp_and_variable_genes_large_dataset.png")
 plot(exp_data.med, exp_data.sd, pch=".", ylab="Standard Deviation",
-     xlab="Median Expression per Gene", 
+     xlab="Median Expression per Gene", main="Expression and Variance of all Genes",
      col=ifelse((exp_data.med>(exp_cutoff - 0.001) & exp_data.sd>(sd_cutoff - 0.001)) | 
                   rownames(expression_data) %in% pam50_genes$gene, "red", "black"))
+legend("topright", legend=c("High Expression & Variance"), col=c("red"), pch=20)
 abline(v=exp_cutoff, h=sd_cutoff)
 dev.off()
 
@@ -39,4 +39,7 @@ expression_data<-subset(expression_data, (expression_data[, "exp_data.med"] > ex
                                             expression_data[, "exp_data.sd"] > sd_cutoff) | 
                           rownames(expression_data) %in% pam50_genes$gene)
 
+#drop the median expression and standard deviation columns bc they're not samples
+expression_data<-expression_data[, -1905]
+expression_data<-expression_data[, -1905] #you removed med in the step above so sd became 1905
 write.table(expression_data, "derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", sep=",", col.names=NA)
