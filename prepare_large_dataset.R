@@ -7,7 +7,7 @@ library(tidyverse)
 #Read in dataset and prepare the data
 pam50_genes<-read.csv("source_data/pam50_genes.csv", header=TRUE, sep=",")
 
-expression_data<-read.table(dir('source_data/', full.names=T, pattern="^data"), sep="\t", header=TRUE, fill=TRUE) %>% 
+expression_data<-read.table("data_mrna_expression.txt", sep="\t", header=TRUE, fill=TRUE) %>% 
   select(-Entrez_Gene_Id)
 expression_data<-expression_data[!duplicated(expression_data[,"Hugo_Symbol"]),]
 rownames(expression_data)<-expression_data[,1]
