@@ -1,5 +1,5 @@
-
-
+#glm_large_set.R
+#Creates a general linear model to predict death from subtype
 
 library(tidyverse)
 
@@ -30,7 +30,9 @@ test$death_occurred<-as.numeric(test$death_occurred)
 
 model<-glm(death_occurred ~ CLAUDIN_SUBTYPE, data=train, family="binomial")
 
-test<-test %>% mutate(death_prob_predict=predict(model, newdata=test, type="response"))
+prob<-predict(model, newdata=test, type="response")
+#test_ex<-test %>% mutate(death_prob_predict=1*(prob>0.5))
+test_ex<-test %>% mutate(death_prob_predict=predict(model, newdata=test, type="response"))
 
 rate<-function(a){
   sum(a)/length(a);
@@ -41,14 +43,16 @@ maprbind<-function(f,l){
 }
 
 roc<-maprbind(function(thresh){
-  ltest<-test %>% mutate(death_pred=1*(death_prob_predict>=thresh)) %>%
+  ltest<-test_ex %>% mutate(death_pred=1*(death_prob_predict>=thresh)) %>%
     mutate(correct=death_pred == death_occurred);
   tp<-ltest %>% filter(ltest$death_occurred==1) %>% pull(correct) %>% rate();
   fp<-ltest %>% filter(ltest$death_occurred==0) %>% pull(correct) %>% `!`() %>% rate();
   tibble(threshold=thresh, true_positive=tp, false_positive=fp);
 }, seq(from=0, to=1, length.out=10)) %>% arrange(false_positive, true_positive)
 
+pdf("figures/roc_curve_glm.pdf", width=7, height=5)
 ggplot(roc, aes(false_positive, true_positive)) + geom_line()
+dev.off()
 
 summary(model)
 
