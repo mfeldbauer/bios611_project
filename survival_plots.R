@@ -31,7 +31,7 @@ fit_survival<-survfit(Surv(km_table_survival$OS_YEARS, km_table_survival$status)
 pdf("figures/km_plot_overall_survival.pdf", width=10, height=8, onefile=FALSE)
 ggsurvplot(fit_survival, data=km_table_survival, risk.table=TRUE,
            palette=c("red", "darkorange", "hotpink", "darkblue", "skyblue", "green"),
-           legend.title="Subtype",
+           legend.title="Subtype", xlab="Time (years)", title="Overall Survival",
            legend.labs=c("Basal", "Claudin-low", "HER2", "Luminal A", "Luminal B", "Normal")
 )
 dev.off()
@@ -55,7 +55,7 @@ fit_recur<-survfit(Surv(km_table_recur$RFS_YEARS, km_table_recur$status) ~ Subty
 pdf("figures/km_plot_overall_recur.pdf", width=10, height=8, onefile=FALSE)
 ggsurvplot(fit_recur, data=km_table_recur, risk.table=TRUE,
            palette=c("red", "darkorange", "hotpink", "darkblue", "skyblue", "green"),
-           legend.title="Subtype",
+           legend.title="Subtype", xlab="Time (years)", title="Recurrence-Free Survival",
            legend.labs=c("Basal", "Claudin-low", "HER2", "Luminal A", "Luminal B", "Normal")
 )
 dev.off()
