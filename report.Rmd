@@ -5,14 +5,58 @@ date: "`r Sys.Date()`"
 output:
   pdf_document: default
   html_document: default
+header-includes:
+  \usepackage{float}
+  \floatplacement{figure}{H}
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r figs, echo=FALSE, fig.cap="\\label{fig:figs}Heatmap of mRNA expression featuring only the genes with more than 100 mutations recorded in the dataset."}
+# Introduction
 
-knitr::include_graphics("figures/mrna_expression_heatmap_most_mutated_genes.png")
+Breast cancer
+
+The data sets I chose
+
+
+```{r scatter_plot, echo=FALSE, fig.cap="\\label{fig:scatter_plot}Scatter plot showing median expression and standard deviation for each gene in the entire dataset."}
+ 
+knitr::include_graphics("figures/highly_exp_and_variable_genes_large_dataset.pdf")
 ```
 
+Clinical features - show histograms
+
+# mRNA Expression Heatmap
+
+```{r large_heatmap, echo=FALSE, fig.cap="\\label{fig:large_heatmap}Heatmap of mRNA expression featuring the 44 PAM50 genes that were present in the large dataset."}
+ 
+knitr::include_graphics("figures/large_set_pam50genes_heatmap.pdf")
+```
+
+
+# Principal Component Analysis
+
+```{r pca, echo=FALSE, fig.cap="\\label{fig:pca}First two principal components from the principal component analysis performed using the most highly expressed and variable genes. Color indicates subtype of the sample at that point."}
+ 
+knitr::include_graphics("figures/pca_plot_high_exp_and_var.pdf")
+```
+
+```{r pca_multiple, echo=FALSE, fig.cap="\\label{fig:pca_multiple}First five principal components plotted against each other. The colors again indicate the subtype of the sample but not that they do not match with the colors of previous PCA plot."}
+ 
+knitr::include_graphics("figures/multiplot_five_pcs.pdf")
+```
+
+# Survival Analysis
+
+```{r km_overall, echo=FALSE, fig.cap="\\label{fig:km_overall}Survival plot for overall survival. Each line represents a subtype. The tick marks represent censored patients."}
+ 
+knitr::include_graphics("figures/km_plot_overall_survival.pdf")
+```
+
+```{r km_recur, echo=FALSE, fig.cap="\\label{fig:km_recur}Survival plot for recurrence-free survival. Each line represents a subtype. The tick marks represent censored patients."}
+ 
+knitr::include_graphics("figures/km_plot_overall_recur.pdf")
+```
+
+# Future work

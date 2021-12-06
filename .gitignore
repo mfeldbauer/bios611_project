@@ -8,3 +8,5 @@ scratch.R
 *.pdf
 *.log
 source_data/data*
+report.tex
+report.knit.md
