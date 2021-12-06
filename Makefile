@@ -8,7 +8,7 @@ clean:
 	rm -f report.pdf
 
 report.pdf:\
-figures/highly_exp_and_variable_genes_large_dataset.png \
+figures/highly_exp_and_variable_genes_large_dataset.pdf \
 figures/large_set_pam50genes_heatmap.pdf \
 figures/pca_plot_high_exp_and_var.pdf \
 figures/multiplot_five_pcs.pdf \
@@ -32,14 +32,14 @@ pca_highly_exp_and_var.R
 	mkdir -p figures
 	Rscript pca_highly_exp_and_var.R
 
-figures/large_set_highly_var_and_exp_heatmap.png: source_data/clinical_patient_info.txt \
+figures/large_set_highly_var_and_exp_heatmap.pdf: source_data/clinical_patient_info.txt \
 source_data/clinical_sample_info.txt \
 derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv \
 large_dataset_heatmap.R
 	mkdir -p figures
 	Rscript large_dataset_heatmap.R
 
-figures/highly_exp_and_variable_genes_large_dataset.png: source_data/data_mrna_expression.txt \
+figures/highly_exp_and_variable_genes_large_dataset.pdf: source_data/data_mrna_expression.txt \
 prepare_large_dataset.R
 	mkdir -p figures
 	Rscript prepare_large_dataset.R
