@@ -7,14 +7,26 @@ clean:
 	rm -rf figures
 	rm -f report.pdf
 
-report.pdf: figures/highly_exp_and_variable_genes_large_dataset.png \
+report.pdf:\
+figures/highly_exp_and_variable_genes_large_dataset.png \
 figures/large_set_pam50genes_heatmap.pdf \
 figures/pca_plot_high_exp_and_var.pdf \
+figures/multiplot_five_pcs.pdf \
+figures/km_plot_overall_survival.pdf \
+figures/km_plot_overall_recur.pdf \
 build_report.R
 	Rscript build_report.R
 
 #Larger dataset
-figures/pca_plot_high_exp_and_var.pdf: derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv \
+figures/km_plot_overall_survival.pdf figures/km_plot_overall_recur.pdf &:\
+source_data/clinical_patient_info.txt \
+derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv \ 
+survival_plots.R
+	mkdir -p figures
+	Rscript survival_plots.R
+
+figures/pca_plot_high_exp_and_var.pdf figures/multiplot_five_pcs.pdf &:\
+derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv \
 source_data/clinical_patient_info.txt \
 pca_highly_exp_and_var.R
 	mkdir -p figures
@@ -32,7 +44,8 @@ prepare_large_dataset.R
 	mkdir -p figures
 	Rscript prepare_large_dataset.R
 
-derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv: source_data/data_mrna_expression.txt \
+derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv:\
+source_data/data_mrna_expression.txt \
 source_data/pam50_genes.csv \
 prepare_large_dataset.R
 	mkdir -p figures
@@ -61,7 +74,10 @@ heatmap_most_mutated_genes.R
 	mkdir -p figures
 	Rscript heatmap_most_mutated_genes.R
 
-derived_data/patient_and_clinical_data.csv derived_data/expression_data.csv derived_data/mutation_data.csv &: source_data/METABRIC_RNA_Mutation.csv \
+derived_data/patient_and_clinical_data.csv \
+derived_data/expression_data.csv \
+derived_data/mutation_data.csv &:\
+source_data/METABRIC_RNA_Mutation.csv \
 separate_data.R
 	mkdir -p derived_data
 	Rscript separate_data.R
