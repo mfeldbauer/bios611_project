@@ -42,4 +42,4 @@ expression_data<-subset(expression_data, (expression_data[, "exp_data.med"] > ex
 #drop the median expression and standard deviation columns bc they're not samples
 expression_data<-expression_data[, -1905]
 expression_data<-expression_data[, -1905] #you removed med in the step above so sd became 1905
-write.table(expression_data, "derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", sep=",", col.names=NA)
+write.table(expression_data, "derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv", sep=",", col.names=NA)
