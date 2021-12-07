@@ -24,19 +24,20 @@ ages$age_group<-cut(clinical_info$AGE_AT_DIAGNOSIS,
                     pretty(clinical_info$AGE_AT_DIAGNOSIS, 8), labels=labs)
 ages_wide<-tabyl(ages, age_group, CLAUDIN_SUBTYPE)
 
-#pdf("figures/age_at_diagnosis_by_type.pdf")
+max_count_ages<-200
+
 basal<-plot_ly(ages_wide, x=~ages_wide$age_group, y=~ages_wide$Basal, type="bar", name="Basal") %>%
-  layout(yaxis=list(range=c(0,200)))
+  layout(yaxis=list(range=c(0,max_count_ages)))
 claudin_low<-plot_ly(ages_wide, x=~ages_wide$age_group, y=~ages_wide$`claudin-low`, type="bar", name="Claudin Low") %>%
-  layout(yaxis=list(range=c(0,200)))
+  layout(yaxis=list(range=c(0,max_count_ages)))
 her2<-plot_ly(ages_wide, x=~ages_wide$age_group, y=~ages_wide$Her2, type="bar", name="HER2") %>%
-  layout(yaxis=list(range=c(0,200)))
+  layout(yaxis=list(range=c(0,max_count_ages)))
 lumA<-plot_ly(ages_wide, x=~ages_wide$age_group, y=~ages_wide$LumA, type="bar", name="Luminal A") %>%
-  layout(yaxis=list(range=c(0,200)))
+  layout(yaxis=list(range=c(0,max_count_ages)))
 lumB<-plot_ly(ages_wide, x=~ages_wide$age_group, y=~ages_wide$LumB, type="bar", name="Luminal B") %>%
-  layout(yaxis=list(range=c(0,200)))
+  layout(yaxis=list(range=c(0,max_count_ages)))
 normal<-plot_ly(ages_wide, x=~ages_wide$age_group, y=~ages_wide$Normal, type="bar", name="Normal") %>%
-  layout(yaxis=list(range=c(0,200)))
+  layout(yaxis=list(range=c(0,max_count_ages)))
 fig<-subplot(basal, claudin_low, her2, lumA, lumB, normal, nrows=3) %>% layout(title="Age at Diagnosis")
 
 fig
