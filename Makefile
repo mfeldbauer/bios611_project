@@ -1,6 +1,7 @@
 .PHONY: clean
 .PHONY: shiny_app
 .PHONY: shiny_heatmap
+.PHONY: shiny_app_large_set
 
 clean:
 	rm -rf derived_data
@@ -38,6 +39,11 @@ derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
 large_dataset_heatmap.R
 	mkdir -p figures
 	Rscript large_dataset_heatmap.R
+
+shiny_app_large_set: source_data/clinical_patient_info.txt \
+source_data/clinical_sample_info.txt \
+large_set_clinical_data_plots.R
+	Rscript large_set_clinical_data_plots.R
 
 figures/highly_exp_and_variable_genes_large_dataset.pdf: source_data/data_mrna_expression.txt \
 prepare_large_dataset.R

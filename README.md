@@ -61,15 +61,19 @@ make shiny_heatmap
 
 Once it runs, open a new browser tab and go to ```localhost:8080```. You will be able to zoom in on areas of the map which will produce a sub-heatmap.
 
-To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the other shiny app.
+To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the other shiny apps.
 
-## How to run the shiny app to explore patient data:
-```interactive_plots.R``` creates a shiny app that allows you to explore patient data based on breast cancer subtype. Note that these data come from the inital dataset downloaded from kaggle. The clinical data for the larger data set from cBioPortal might be slightly different. You can choose which data to display on the x-axis (age at diagnosis, whether the patient is living or has died, and survival length in months) and which subtype to investigate. 
+## How to run the shiny apps to explore patient data:
+```interactive_plots.R``` creates a shiny app that allows you to explore patient data based on breast cancer subtype. Note that these data come from the inital dataset downloaded from kaggle. The clinical data for the larger data set from cBioPortal might be slightly different. ```large_set_clinical_data_plots.R``` creates a shiny app to explore the larger dataset's clinical data. You can choose which data to display on the x-axis (age at diagnosis, whether the patient is living or has died, survival length in months, whether the patient's tumor recurred, and time to recurrence) and which subtype to investigate. 
 
 In order to run the shiny app, run this command in your Rstudio terminal:
 
 ```make shiny_app```
 
-Once it runs, open a new browser tab and go to ```localhost:8080```. You will be able to choose the subtype and which data you want to visualize. 
+In order to run the shiny app exploring the clinical data corresponding to the larger dataset, run this command in your Rstudio terminal:
 
-To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the other shiny app.
+```make shiny_app_large_set ```
+
+Once either of these apps runs, open a new browser tab and go to ```localhost:8080```. You will be able to choose the subtype and which data you want to visualize. 
+
+To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the interactive shiny heatmap.
