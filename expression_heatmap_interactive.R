@@ -12,11 +12,13 @@ library(InteractiveComplexHeatmap)
 expression_data<-read.csv("derived_data/expression_data.csv", header=TRUE, sep=",", row.names=1)
 expression_matrix<-as.matrix(t(expression_data)) #transpose so that genes are rows and samples are columns
 
-
 sample_annotation<-read.csv("derived_data/patient_and_clinical_data.csv", header=TRUE,sep=",", row.names=1) %>%
   select(c("age_at_diagnosis",
          "cancer_type_detailed","pam50_._claudin.low_subtype",
          "er_status_measured_by_ihc","her2_status"))
+
+#Should all be true (order of samples in exp matrix should be same as in annotation)
+summary(colnames(expression_matrix)==rownames(sample_annotation))
 
 table(sample_annotation$pam50_._claudin.low_subtype)
 table(sample_annotation$er_status_measured_by_ihc)

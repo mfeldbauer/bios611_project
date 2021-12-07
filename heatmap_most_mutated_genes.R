@@ -22,6 +22,10 @@ sample_annotation<-read.csv("derived_data/patient_and_clinical_data.csv", header
            "cancer_type_detailed","pam50_._claudin.low_subtype",
            "er_status_measured_by_ihc","her2_status"))
 
+#The order of the samples in the expression matrix should be the same as the annotation file
+#(should all be true)
+summary(colnames(expression_matrix)==rownames(sample_annotation))
+
 col_fun<-colorRamp2(c(-2,0,2), colorRampPalette(c("dodgerblue", "white", "red2"))(3))
 
 map_annotation_samples<-HeatmapAnnotation(subtype=sample_annotation$pam50_._claudin.low_subtype, er_status=sample_annotation$er_status_measured_by_ihc,
