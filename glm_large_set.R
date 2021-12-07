@@ -2,6 +2,7 @@
 #Creates a general linear model to predict death from subtype
 
 library(tidyverse)
+select<-dplyr::select
 
 patient_info<-read.table("source_data/clinical_patient_info.txt", header=TRUE, sep="\t", fill=TRUE)
 expression_data<-read.csv("derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1, fill=TRUE)
@@ -10,7 +11,6 @@ patient_info<-patient_info[patient_info$PATIENT_ID %in% colnames(expression_data
 nc_rows<-which(patient_info$CLAUDIN_SUBTYPE=="NC")
 patient_info<-patient_info[-nc_rows,]
 
-select<-dplyr::select
 death_table<-patient_info %>% dplyr::select("PATIENT_ID", "OS_MONTHS", "OS_STATUS", 
                                      "CLAUDIN_SUBTYPE", "VITAL_STATUS")
 other_death_rows<-which(death_table$VITAL_STATUS=="Died of Other Causes")
@@ -30,9 +30,13 @@ test$death_occurred<-as.numeric(test$death_occurred)
 
 model<-glm(death_occurred ~ CLAUDIN_SUBTYPE, data=train, family="binomial")
 
-prob<-predict(model, newdata=test, type="response")
+
+
+
 #test_ex<-test %>% mutate(death_prob_predict=1*(prob>0.5))
-test_ex<-test %>% mutate(death_prob_predict=predict(model, newdata=test, type="response"))
+test_ex<-test %>% mutate(death_prob_predict=predict(model, newdata=test, type="response")) #%>%
+  mutate(death_predicted=1*(death_prob_predict>=thresh))
+test_ex<-test_ex %>% mutate()
 
 rate<-function(a){
   sum(a)/length(a);
@@ -55,5 +59,4 @@ ggplot(roc, aes(false_positive, true_positive)) + geom_line()
 dev.off()
 
 summary(model)
-
 
