@@ -4,7 +4,6 @@ author: "Mikayla Feldbauer"
 date: "`r Sys.Date()`"
 output:
   pdf_document: default
-  html_document: default
 header-includes:
   \usepackage{float}
   \floatplacement{figure}{H}
@@ -15,19 +14,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-Breast cancer
+Breast cancer is one of the most commonly diagnosed cancers in women both in the United States and worldwide (1). Gene expression data is becoming increasingly common as a means of subtyping individual tumors. Breast cancer is classified into different subtypes based on the expression of certain genes such as estrogen/progesterone receptors. Each subtype varies in prognosis and treatment (2).
 
-The data sets I chose
+The data I chose to analyze comes from the Molecular Taxonomy of Breast Cancer International Consortium (METABRIC) 2012/2016 studies. Initially, I downloaded a dataset containing gene expression data (in the form of mRNA level z-scores), clinical attributes, and mutation data for over 1,900 patients and close to 500 genes (3). However, this dataset was curated and uploaded to kaggle. After initial analysis of this smaller set, I downloaded the complete dataset from cBioPortal (4). This dataset was uploaded and maintained by the researchers performing the METABRIC study and contains mRNA expression data and clinical attributes for over 1,900 patients and over 24,000 genes. 
 
+The entire dataset containing over 24,000 genes proved too large to work with. To trim the dataset down, I took only the genes that had high expression and high variance. I chose arbitrary cutoffs of 7.5 for median expression per gene and 0.5 for standard deviation. The below figure shows the scatter plot comparing median expression per gene with standard deviation. The highly expressed and variable genes, based on the aforementioned cutoffs, are colored in red. The PAM50 genes that were included in the dataset (44 total) are also colored in red. 
 
 ```{r scatter_plot, echo=FALSE, fig.cap="\\label{fig:scatter_plot}Scatter plot showing median expression and standard deviation for each gene in the entire dataset."}
  
 knitr::include_graphics("figures/highly_exp_and_variable_genes_large_dataset.pdf")
 ```
 
-Clinical features - show histograms
+To explore the clinical data associated with this dataset, I created a Shiny app that allows you to select which data and which subtype to explore. Instructions for running the Shiny app are in the README for this project. 
 
 # mRNA Expression Heatmap
+
+The PAM50 genes are a set of 50 genes whose expression levels are used to subtype breast tumors (2). This dataset included expression data from 44 of the 50 PAM50 genes. After median centering across genes, I created an mRNA expression heatmap using these 44 genes. I clustered the genes and samples using hierarchical clustering. 
 
 ```{r large_heatmap, echo=FALSE, fig.cap="\\label{fig:large_heatmap}Heatmap of mRNA expression featuring the 44 PAM50 genes that were present in the large dataset."}
  
@@ -60,3 +62,12 @@ knitr::include_graphics("figures/km_plot_overall_recur.pdf")
 ```
 
 # Future work
+
+# References
+
+1. Waks AG and Winer EP. 2019. Breast Cancer Treatment: A Review. *JAMA*. 321(3):288-300. doi:10.1001/jama.2018.19323
+2. Bernhardt SM, Dasari P, Walsh D, Townsend AR, Price TJ, *et al*. 2016. Hormonal Modulation of Breast Cancer Gene Expression: Implications for Intrinsic Subtyping in Premenopausal Women. *Front. Oncol*. 6:241. doi: 10.3389/fonc.2016.00241
+3. https://www.kaggle.com/raghadalharbi/breast-cancer-gene-expression-profiles-metabric
+4. https://www.cbioportal.org/study/summary?id=brca_metabric 
+
+

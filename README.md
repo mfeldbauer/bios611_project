@@ -74,6 +74,6 @@ In order to run the shiny app exploring the clinical data corresponding to the l
 
 ```make shiny_app_large_set ```
 
-Once either of these apps runs, open a new browser tab and go to ```localhost:8080```. You will be able to choose the subtype and which data you want to visualize. 
+Once either of these apps runs (note that you can only run one at a time), open a new browser tab and go to ```localhost:8080```. You will be able to choose the subtype and which data you want to visualize. 
 
 To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the interactive shiny heatmap.
