@@ -5,7 +5,7 @@ library(survival)
 library(survminer)
 
 patient_info<-read.table("source_data/clinical_patient_info.txt", header=TRUE, sep="\t", fill=TRUE)
-expression_data<-read.csv("derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1, fill=TRUE)
+expression_data<-read.csv("derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1, fill=TRUE)
 
 patient_info<-patient_info[patient_info$PATIENT_ID %in% colnames(expression_data),]
 nc_rows<-which(patient_info$CLAUDIN_SUBTYPE=="NC")

@@ -5,7 +5,7 @@ library(tidyverse)
 library(circlize)
 library(fastcluster)
 
-expression_data<-read.csv("derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1)
+expression_data<-read.csv("derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1)
 pam50_genes<-read.csv("source_data/pam50_genes.csv", header=TRUE)
 expression_data<-expression_data[rownames(expression_data) %in% pam50_genes$gene,] #trim expression data
 pam50_genes<-pam50_genes[pam50_genes$gene %in% rownames(expression_data),] #in turn, trim the gene list

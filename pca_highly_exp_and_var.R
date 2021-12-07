@@ -6,7 +6,7 @@ library(ggplot2)
 library(GGally)
 select<-dplyr::select
 
-expression_data<-read.csv("derived_data/highly_exp_and_mut_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1, fill=TRUE)
+expression_data<-read.csv("derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv", header=T, sep=",", row.names=1, fill=TRUE)
 expression_data<-na.omit(expression_data)
 
 #Function to mean center the samples
