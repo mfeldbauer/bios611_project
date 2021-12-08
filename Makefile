@@ -24,7 +24,7 @@ build_report.R
 #Larger dataset
 
 #Survival plots using clinical data
-figures/km_plot_overall_survival.pdf figures/km_plot_overall_recur.pdf &:\
+figures/km_plot_overall_survival.pdf figures/km_plot_overall_recur.pdf:\
 source_data/clinical_patient_info.txt \
 derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
 survival_plots.R
@@ -32,7 +32,7 @@ survival_plots.R
 	Rscript survival_plots.R
 
 #Principal component analysis
-figures/pca_plot_high_exp_and_var.pdf figures/multiplot_five_pcs.pdf &:\
+figures/pca_plot_high_exp_and_var.pdf figures/multiplot_five_pcs.pdf:\
 derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
 source_data/clinical_patient_info.txt \
 pca_highly_exp_and_var.R
@@ -69,8 +69,8 @@ prepare_large_dataset.R
 	Rscript prepare_large_dataset.R
 
 #Download the large dataset from cbioportal
-source_data/data_mrna_expression.txt: 
-	./obtain_large_dataset.sh
+source_data/data_mrna_expression.txt: obtain_large_dataset.sh
+	bash obtain_large_dataset.sh
 
 
 #Initial dataset
@@ -93,7 +93,7 @@ heatmap_most_mutated_genes.R
 
 derived_data/patient_and_clinical_data.csv \
 derived_data/expression_data.csv \
-derived_data/mutation_data.csv &:\
+derived_data/mutation_data.csv:\
 source_data/METABRIC_RNA_Mutation.csv \
 separate_data.R
 	mkdir -p derived_data
