@@ -16,52 +16,68 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Breast cancer is one of the most commonly diagnosed cancers in women both in the United States and worldwide (1). Gene expression data is becoming increasingly common as a means of subtyping individual tumors. Breast cancer is classified into different subtypes based on the expression of certain genes such as estrogen/progesterone receptors. Each subtype varies in prognosis and treatment (2).
 
-The data I chose to analyze comes from the Molecular Taxonomy of Breast Cancer International Consortium (METABRIC) 2012/2016 studies. Initially, I downloaded a dataset containing gene expression data (in the form of mRNA level z-scores), clinical attributes, and mutation data for over 1,900 patients and close to 500 genes (3). However, this dataset was curated and uploaded to kaggle. After initial analysis of this smaller set, I downloaded the complete dataset from cBioPortal (4). This dataset was uploaded and maintained by the researchers performing the METABRIC study and contains mRNA expression data and clinical attributes for over 1,900 patients and over 24,000 genes. 
+The data I chose to analyze comes from the Molecular Taxonomy of Breast Cancer International Consortium (METABRIC) 2012/2016 studies. Initially, I downloaded a dataset containing gene expression data (in the form of mRNA level z-scores), clinical attributes, and mutation data for over 1,900 patients and close to 500 genes (3). However, this dataset was curated from the original study data and uploaded to kaggle. After initial analysis of this smaller set, I downloaded the complete dataset from cBioPortal (4). This dataset was uploaded and maintained by the researchers performing the METABRIC study and contains mRNA expression data and clinical attributes for over 1,900 patients and over 24,000 genes. 
 
 The entire dataset containing over 24,000 genes proved too large to work with. To trim the dataset down, I took only the genes that had high expression and high variance. I chose arbitrary cutoffs of 7.5 for median expression per gene and 0.5 for standard deviation. The below figure shows the scatter plot comparing median expression per gene with standard deviation. The highly expressed and variable genes, based on the aforementioned cutoffs, are colored in red. The PAM50 genes that were included in the dataset (44 total) are also colored in red. 
+
+## Shiny apps to explore clinical data
+
+To explore the clinical data associated with this dataset, I created a Shiny app that allows you to select which data and which subtype to explore. Instructions for running the Shiny app are in the README for this project.
 
 ```{r scatter_plot, echo=FALSE, fig.cap="\\label{fig:scatter_plot}Scatter plot showing median expression and standard deviation for each gene in the entire dataset."}
  
 knitr::include_graphics("figures/highly_exp_and_variable_genes_large_dataset.pdf")
 ```
 
-To explore the clinical data associated with this dataset, I created a Shiny app that allows you to select which data and which subtype to explore. Instructions for running the Shiny app are in the README for this project. 
-
 # mRNA Expression Heatmap
 
-The PAM50 genes are a set of 50 genes whose expression levels are used to subtype breast tumors (2). This dataset included expression data from 44 of the 50 PAM50 genes. After median centering across genes, I created an mRNA expression heatmap using these 44 genes. I clustered the genes and samples using hierarchical clustering. 
+The PAM50 genes are a set of 50 genes whose expression levels are used to subtype breast tumors (2). This dataset included expression data from 44 of the 50 PAM50 genes. After median centering across genes, I created an mRNA expression heatmap using these 44 genes. I clustered the genes and samples using hierarchical clustering. Each column is a sample and each row is a gene. The samples are labeled based on their Estrogen Receptor (ER) and HER2 (a growth factor receptor) status as well as subtype. The genes are labeled based on their role in the cell. 
+
+Although there is some overlapping with the way the different subtypes clustered, the main separation is between the basals and the other subtypes. This is expected because basal tumors are the most distinct subtype and are always the first separation to occur. The basal cluster makes a distinct expression pattern with high expression of genes like *FOXC1*, *BIRC5*, and the Keratin genes while having low expression of *ESR1*, *FOXA1*, AND *MLPH* (2). 
 
 ```{r large_heatmap, echo=FALSE, fig.cap="\\label{fig:large_heatmap}Heatmap of mRNA expression featuring the 44 PAM50 genes that were present in the large dataset."}
  
 knitr::include_graphics("figures/large_set_pam50genes_heatmap.pdf")
 ```
 
-
-# Principal Component Analysis
-
-```{r pca, echo=FALSE, fig.cap="\\label{fig:pca}First two principal components from the principal component analysis performed using the most highly expressed and variable genes. Color indicates subtype of the sample at that point."}
- 
-knitr::include_graphics("figures/pca_plot_high_exp_and_var.pdf")
-```
-
-```{r pca_multiple, echo=FALSE, fig.cap="\\label{fig:pca_multiple}First five principal components plotted against each other. The colors again indicate the subtype of the sample but not that they do not match with the colors of previous PCA plot."}
- 
-knitr::include_graphics("figures/multiplot_five_pcs.pdf")
-```
-
 # Survival Analysis
+
+Utilizing the survival and recurrence data included with the patient and sample clinical data, I created Kaplan-Meier survival plots for overall survival and recurrence-free survival.
+
+Each line represents one of the subtypes. For overall survival, any patient still alive or who died of other causes was censored. These are represented as tick marks on each line. A drop in the line represents a death due to cancer. Luminal A has the best overall survival rate which is expected due to it being less aggressive with a better prognosis than the other subtypes (2).  
 
 ```{r km_overall, echo=FALSE, fig.cap="\\label{fig:km_overall}Survival plot for overall survival. Each line represents a subtype. The tick marks represent censored patients."}
  
 knitr::include_graphics("figures/km_plot_overall_survival.pdf")
 ```
 
+For recurrence-free survival, any instance in which the cancer did not recur was censored (again, represented as tick marks). Luminal A and Claudin-low seem to have the best probability of recurrence-free survival over time. 
+
 ```{r km_recur, echo=FALSE, fig.cap="\\label{fig:km_recur}Survival plot for recurrence-free survival. Each line represents a subtype. The tick marks represent censored patients."}
  
 knitr::include_graphics("figures/km_plot_overall_recur.pdf")
 ```
 
+# Principal Component Analysis
+
+I decided to trim the number of genes in the initial dataset down by looking at median expression and standard deviation. This still left me with more genes than samples (about 2,600 genes and 1,900 samples). Another way to reduce the dimensionality of the dataset is by performing a principal component analysis. I performed a PCA on the trimmed dataset and plotted the first two principal components against each other (shown below). Together, these principal components account for about 24% of the variation in the dataset. The samples do not separate into completely distinct clusters, but the separation that does occur makes sense. The luminals (LumA and LumB) are near each other and the basals and claudin-lows are near each other with HER2 and normals bordering each group. The expression patterns typically seen with each of these groups makes sense with this separation.
+
+```{r pca, echo=FALSE, fig.cap="\\label{fig:pca}First two principal components from the principal component analysis performed using the most highly expressed and variable genes. Color indicates subtype of the sample at that point."}
+ 
+knitr::include_graphics("figures/pca_plot_high_exp_and_var.pdf")
+```
+
+I also plotted the first five principal components against each other, shown below. Cumulatively, they account for just under 40% of the variation in the dataset. Note that the colors do not match with the colors on the first PCA plot, though they do indicate different subtypes.
+
+```{r pca_multiple, echo=FALSE, fig.cap="\\label{fig:pca_multiple}First five principal components plotted against each other. The colors again indicate the subtype of the sample but not that they do not match with the colors of previous PCA plot."}
+ 
+knitr::include_graphics("figures/multiplot_five_pcs.pdf")
+```
+
 # Future work
+With the results of the principal component analysis, I could run an unsupervised classifier. I would use enough principal components to capture at least 90% of the variation in the dataset. If the classifier could accurately classify the subtype of a tumor based on those principal components, it would indicate that the gene expression patterns captured within those principal components is enough to represent the dataset. However, if the classifier fails, it would indicate that more genes are needed to fully capture the dataset. 
+
+I also plan to implement linear regression using GLM or GBM to determine what combination of variables is enough to predict survival.
 
 # References
 
