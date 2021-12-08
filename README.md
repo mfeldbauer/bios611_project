@@ -51,7 +51,7 @@ make report.pdf
 In order to delete all derived data and make the report from scratch, type ``` make clean ``` in the Rstudio terminal before ``` make report.pdf ```. Note: due to the inclusion of the large dataset, the report takes a while to build. If you want to make individual figures, outside of their inclusion in the report, you can look at what the target is called in the Makefile and type ``` make target_name ``` in the terminal.
 
 ## How to run the shiny app containing an interactive expression heatmap:
-```expression_heatmap_interactive.R``` creates a shiny app containing an interactive heatmap of mRNA expression. You can choose areas on the map that you want to look at further and the submap will be displayed. Note that these expression data come from the inital data set downloaded from kaggle (NOT the larger data set downloaded from cBioPortal.
+```expression_heatmap_interactive.R``` creates a shiny app containing an interactive heatmap of mRNA expression. You can choose areas on the map that you want to look at further and the submap will be displayed. Note that these expression data come from the inital data set downloaded from kaggle (NOT the larger data set downloaded from cBioPortal).
 
 In order to run this shiny app, run this command in your Rstudio terminal:
 
@@ -76,4 +76,4 @@ In order to run the shiny app exploring the clinical data corresponding to the l
 
 Once either of these apps runs (note that you can only run one at a time), open a new browser tab and go to ```localhost:8080```. You will be able to choose the subtype and which data you want to visualize. 
 
-To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the interactive shiny heatmap.
+To close the connection, close the ```localhost:8080``` browser tab and click the stop sign in the upper corner of the Rstudio terminal. This is a necessary step if you want to run the other shiny apps.

@@ -48,7 +48,8 @@ large_dataset_heatmap.R
 	Rscript large_dataset_heatmap.R
 
 #Shiny app for the clinical data from the large dataset
-shiny_app_large_set: source_data/clinical_patient_info.txt \
+shiny_app_large_set: derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
+source_data/clinical_patient_info.txt \
 source_data/clinical_sample_info.txt \
 large_set_clinical_data_plots.R
 	Rscript large_set_clinical_data_plots.R
