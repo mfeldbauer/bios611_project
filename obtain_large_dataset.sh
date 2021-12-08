@@ -13,5 +13,5 @@ do
         fi
 done < /tmp/file_sizes.txt
 
-mv $file_name "$(pwd)"/source_data/data_mrna_expression.txt
+cp $file_name "$(pwd)"/source_data/data_mrna_expression.txt
 rm -rf /tmp/brca_metabric
