@@ -7,8 +7,11 @@ clean:
 	rm -rf derived_data
 	rm -rf figures
 	rm -f report.pdf
+	rm -f source_data/data_mrna_expression.txt
 
 report.pdf:\
+source_data/data_mrna_expression.txt \
+derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
 figures/highly_exp_and_variable_genes_large_dataset.pdf \
 figures/large_set_pam50genes_heatmap.pdf \
 figures/pca_plot_high_exp_and_var.pdf \
@@ -23,7 +26,7 @@ build_report.R
 #Survival plots using clinical data
 figures/km_plot_overall_survival.pdf figures/km_plot_overall_recur.pdf &:\
 source_data/clinical_patient_info.txt \
-derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \ 
+derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
 survival_plots.R
 	mkdir -p figures
 	Rscript survival_plots.R
@@ -37,7 +40,7 @@ pca_highly_exp_and_var.R
 	Rscript pca_highly_exp_and_var.R
 
 #Expression heatmap using PAM50 genes
-figures/large_set_highly_var_and_exp_heatmap.pdf: source_data/clinical_patient_info.txt \
+figures/large_set_pam50genes_heatmap.pdf: source_data/clinical_patient_info.txt \
 source_data/clinical_sample_info.txt \
 derived_data/highly_exp_and_var_genes_matrix_from_large_set.csv \
 large_dataset_heatmap.R
