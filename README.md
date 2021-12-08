@@ -48,7 +48,7 @@ Go to the Rstudio terminal and run
 make report.pdf
 ```
 
-Note: due to the inclusion of the large dataset, the report takes a while to build.
+In order to delete all derived data and make the report from scratch, type ``` make clean ``` in the Rstudio terminal before ``` make report.pdf ```. Note: due to the inclusion of the large dataset, the report takes a while to build. If you want to make individual figures, outside of their inclusion in the report, you can look at what the target is called in the Makefile and type ``` make target_name ``` in the terminal.
 
 ## How to run the shiny app containing an interactive expression heatmap:
 ```expression_heatmap_interactive.R``` creates a shiny app containing an interactive heatmap of mRNA expression. You can choose areas on the map that you want to look at further and the submap will be displayed. Note that these expression data come from the inital data set downloaded from kaggle (NOT the larger data set downloaded from cBioPortal.
